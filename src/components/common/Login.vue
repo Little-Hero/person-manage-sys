@@ -2,8 +2,8 @@
     <div class="login-box">
         <!-- 通过:rules="loginFormRules"来绑定输入内容的校验规则 -->
         <el-form :rules="loginFormRules" ref="loginForm" :model="loginForm" label-position="right" label-width="auto" show-message>
-            <span class="login-title">欢迎登录</span>
-            <div style="margin-top: 15px"></div>
+            <span class="login-title">系统登录</span>
+            <div style="margin-top: 35px"></div>
             <el-form-item label="用户名" prop="loginName">
                 <el-col :span="22">
                     <el-input type="text" v-model="loginForm.loginName"></el-input>
@@ -14,9 +14,9 @@
                     <el-input type="password" v-model="loginForm.loginPassword"></el-input>
                 </el-col>
             </el-form-item>
-            <div>
-              <el-button type="primary" @click="loginSubmit('loginForm')">登录</el-button>
-              <el-button type="primary" @click="resetForm('loginForm')">取消</el-button>
+            <div style="margin-top: 35px;margin-bottom: 10px">
+              <el-button style="width:90%" type="primary" @click="loginSubmit('loginForm')">登录</el-button>
+              <!-- <el-button type="primary" @click="resetForm('loginForm')">取消</el-button> -->
             </div>
         </el-form>
     </div>
@@ -38,10 +38,25 @@
                     loginPassword: [
                         {required: true, message: '密码不可为空', trigger: 'blur'}
                     ]
-                }
+                },
+                responseResult: []
             }
         },
         methods: {
+          // login () {
+          //   this.$axios
+          //     .post('/login', {
+          //       username: this.loginForm.loginName,
+          //       password: this.loginForm.loginPassword
+          //     })
+          //     .then(successResponse => {
+          //       if (successResponse.data.code === 200) {
+          //         this.$router.replace({path: '/index'})
+          //       }
+          //     })
+          //     .catch(failResponse => {
+          //     })
+          // },
             loginSubmit(formName) {
                 // 为表单绑定验证功能
                 this.$refs[formName].validate((valid) => {
@@ -64,11 +79,11 @@
 <style scoped>
     .login-box {
         border: 1px solid #DCDFE6;
-        width: 350px;
+        width: 400px;
         margin: 180px auto;
-        padding: 35px 35px 20px 35px;
+        padding: 35px 25px 20px 35px;
         border-radius: 5px;
-        -webkit-border-radius: 6px;
+        -webkit-border-radius: 15px;
         -moz-border-radius: 5px;
         box-shadow: 0 0 25px rgb(152, 198, 251);
         text-align: center;

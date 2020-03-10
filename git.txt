@@ -1,0 +1,8 @@
+保存项目到github命令：
+1. 创建仓库
+2. git init
+3. git add .
+4. git commit -m "--注释--"
+5. git remote add origin https://github.com/Little-Hero/MyVue-of-Number.1.git
+6. git pull --rebase origin master //获取远程库与本地同步合并,否则提交失败
+7. git push -u origin master 

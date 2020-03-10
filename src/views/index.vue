@@ -1,10 +1,18 @@
 <template>
-  <h2>登录成功，欢迎您</h2>
+  <div class="index">
+    <Layout></Layout>
+  </div>
 </template>
 
 <script>
-export default {
+import Layout from 'components/content/Layout'
 
+
+
+export default {
+    components: {
+      Layout
+    }
 }
 </script>
 
