@@ -12,7 +12,7 @@
 export default {
     data() {
       return {
-        activeIndex: '1'
+        activeIndex: '1'      // 默认选中index为1的菜单栏
       }
     },
     methods: {

@@ -1,0 +1,157 @@
+<template>
+  <div class="AddUsers">
+    <el-button type="primary" @click="centerDialogVisible = true">添加用户</el-button>
+    <!--------------------------------------- 点击按钮弹框 --------------------------------------->
+    <el-dialog
+      title="添加用户"
+      :visible.sync="centerDialogVisible"
+      width="39%"
+      center>
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <el-form-item label="编号" prop="id">
+          <el-input v-model="ruleForm.id"></el-input>
+        </el-form-item>
+        <el-form-item label="姓名" prop="name">
+          <el-input v-model="ruleForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="性别" prop="sex">
+          <el-radio v-model="ruleForm.sex" label="男">男</el-radio>
+          <el-radio v-model="ruleForm.sex" label="女">女</el-radio>
+        </el-form-item>
+        <el-form-item label="年龄" prop="age">
+          <el-input v-model.number="ruleForm.age"></el-input>
+        </el-form-item>
+        <el-form-item label="电话" prop="phone">
+          <el-input v-model.number="ruleForm.phone"></el-input>
+        </el-form-item>
+        <el-form-item label="电子邮箱" prop="email">
+          <el-input v-model="ruleForm.email"></el-input>
+        </el-form-item>
+        <el-form-item label="所在部门" prop="department">
+          <el-input v-model="ruleForm.department"></el-input>
+        </el-form-item>
+        <el-form-item label="家庭住址" prop="adress">
+          <el-input v-model="ruleForm.adress"></el-input>
+        </el-form-item>
+        <div style="text-align:center">
+          <el-button type="primary" @click="submitForm('ruleForm');centerDialogVisible = false">添加</el-button>
+          <el-button @click="resetForm('ruleForm')">重置</el-button>
+        </div>
+      </el-form>
+    </el-dialog>
+  </div>
+</template>
+
+<script>
+import { postUser } from "network/post"
+
+export default {
+    data() {
+      return {
+        centerDialogVisible: false,     // 默认弹框，false，true则进入页面自动弹框
+        // 获取需要限制的prop
+        ruleForm: {
+          id: '',
+          name: '',
+          sex: '',
+          age: '',
+          phone: '',
+          email: '',
+          department: '',
+          adress: ''
+        },
+        // 限制输入的东西是否符合规则
+        rules: {
+          id: [
+            { required: true, message: '请输入ID' }
+          ],
+          name: [
+            { required: true, message: '请输入活动名称', trigger: 'change' },
+            { min: 2, max: 3, message: '长度在 2 到 3 个字符', trigger: 'blur' }
+          ],
+          sex: [
+            { required: true, message: '请选择性别', trigger: 'change' }
+          ],
+          age: [
+            { required: true, message: '请输入年龄', trigger: 'blur' },
+            { type: 'integer', message: '年龄必须为数字值'}
+          ],
+          phone: [
+            { required: true, message: '请输入电话号码', trigger: 'change' },            
+            { type: 'integer', message: '电话号码必须为数字值'}
+          ],
+          email: [
+            { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }
+          ],
+          department: [
+            { required: true, message: '请输入部门名称', trigger: 'change' }
+          ],          
+        }
+      }
+    },
+    props: {
+      //父组件传递过来的数据：tableData
+      tableAddData: {
+        type: Array,
+        default(){
+          return []
+        }
+      }
+    },
+    methods: {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {            
+            let newUser = {
+              id: this.ruleForm.id,
+              name: this.ruleForm.name,
+              sex: this.ruleForm.sex,
+              age: this.ruleForm.age,
+              phone: this.ruleForm.phone,
+              email: this.ruleForm.email,
+              department: this.ruleForm.department,
+              adress: this.ruleForm.adress
+            }
+            /**
+             * 给post.js发送网络请求，提供一个对象
+             */
+            postUser(newUser)
+            .then(res => {
+              this.$message({
+                type: 'success',
+                message: '添加成功'
+            })
+            this.tableAddData.push(newUser)
+            this.$refs[formName].resetFields()
+            })
+            //显示添加成功
+            
+            this.tableAddData.sort((a, b) => {
+              return a.id - b.id
+            })
+            // setTimeout(() => {                      
+            //   location.reload()
+            // },1500)
+          } else {
+            this.$message({
+                type: 'error',
+                message: '请正确输入后重试'
+            })
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields()
+      }
+    }
+}
+</script>
+
+<style scoped>
+    .AddUsers{
+      float: left;
+      width: 90px;
+    }
+</style>

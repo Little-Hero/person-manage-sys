@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <!--------------------------------------- 登录入口 --------------------------------------->
     <router-view/>
   </div>
 </template>
@@ -9,7 +10,8 @@ export default {
 }
 </script>
 <style>
-@import 'assets/css/base.css'
-
-
+/**
+  导入css样式文件
+ */
+@import 'assets/css/base.css'     
 </style>

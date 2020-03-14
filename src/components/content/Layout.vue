@@ -14,7 +14,10 @@
     <!-- 主要内容 -->
     <el-container>
       <el-main class="main">
-        <router-view/>
+        <!-- keep-alive保持路由再次访问下不用重复加载数据 -->
+        <keep-alive>
+          <router-view/>
+        </keep-alive>
       </el-main>
 
       <!-- 尾部内容 -->
