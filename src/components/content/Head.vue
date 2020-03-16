@@ -36,5 +36,6 @@ export default {
     }
     .Head .el-menu.el-menu--horizontal{
       border: 0;
+      background: none;
     }
 </style>

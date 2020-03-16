@@ -17,7 +17,7 @@ const routes = [
 
     // --------------------------以下均采用懒加载方式注册路由--------------------------
 
-    // -----------------------------------首页路由-----------------------------------
+    // -----------------------------------首页路由及内部路由-----------------------------------
     {
         path: '/index',
         component: () =>
@@ -84,6 +84,13 @@ const routes = [
                     import ( /* webpackChunkName: "DepartmentVue" */ 'views/workers/Workers.vue'),
             }
         ]
+    },
+    // -----------------------------------详情按钮路由-----------------------------------
+    {
+        name: 'Detail',
+        path: '/detail/:id',
+        component: () =>
+            import ( /* webpackChunkName: "Detail" */ 'components/common/Detail.vue'),
     }
 ]
 

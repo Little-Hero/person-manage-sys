@@ -13,5 +13,5 @@ export default {
 /**
   导入css样式文件
  */
-@import 'assets/css/base.css'     
+@import 'assets/css/base.css'
 </style>

@@ -21,14 +21,17 @@
         <el-form-item label="年龄" prop="age">
           <el-input v-model.number="ruleForm.age"></el-input>
         </el-form-item>
+        <el-form-item label="所在部门" prop="department">
+          <el-input v-model="ruleForm.department"></el-input>
+        </el-form-item>
+        <el-form-item label="担任职位" prop="woking">
+          <el-input v-model="ruleForm.woking"></el-input>
+        </el-form-item>
         <el-form-item label="电话" prop="phone">
           <el-input v-model.number="ruleForm.phone"></el-input>
         </el-form-item>
         <el-form-item label="电子邮箱" prop="email">
           <el-input v-model="ruleForm.email"></el-input>
-        </el-form-item>
-        <el-form-item label="所在部门" prop="department">
-          <el-input v-model="ruleForm.department"></el-input>
         </el-form-item>
         <el-form-item label="家庭住址" prop="adress">
           <el-input v-model="ruleForm.adress"></el-input>
@@ -55,9 +58,10 @@ export default {
           name: '',
           sex: '',
           age: '',
+          department: '',
+          woking: '',
           phone: '',
           email: '',
-          department: '',
           adress: ''
         },
         // 限制输入的东西是否符合规则
@@ -67,7 +71,7 @@ export default {
           ],
           name: [
             { required: true, message: '请输入活动名称', trigger: 'change' },
-            { min: 2, max: 3, message: '长度在 2 到 3 个字符', trigger: 'blur' }
+            { min: 2, max: 4, message: '长度在 2 到 4 个字符', trigger: 'blur' }
           ],
           sex: [
             { required: true, message: '请选择性别', trigger: 'change' }
@@ -76,16 +80,20 @@ export default {
             { required: true, message: '请输入年龄', trigger: 'blur' },
             { type: 'integer', message: '年龄必须为数字值'}
           ],
+          department: [
+            { required: true, message: '请输入部门名称', trigger: 'change' }
+          ],
+          woking: [
+            { required: true, message: '请输入担任职位', trigger: 'change' }
+          ],
           phone: [
             { required: true, message: '请输入电话号码', trigger: 'change' },            
-            { type: 'integer', message: '电话号码必须为数字值'}
+            { type: 'integer', message: '电话号码必须为数字值', trigger: 'change'}
           ],
           email: [
             { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }
-          ],
-          department: [
-            { required: true, message: '请输入部门名称', trigger: 'change' }
-          ],          
+          ]
+          
         }
       }
     },
@@ -117,18 +125,19 @@ export default {
              */
             postUser(newUser)
             .then(res => {
+              //显示添加成功
               this.$message({
                 type: 'success',
                 message: '添加成功'
             })
             this.tableAddData.push(newUser)
-            this.$refs[formName].resetFields()
-            })
-            //显示添加成功
-            
             this.tableAddData.sort((a, b) => {
               return a.id - b.id
             })
+            this.$refs[formName].resetFields()
+            })
+            
+            
             // setTimeout(() => {                      
             //   location.reload()
             // },1500)

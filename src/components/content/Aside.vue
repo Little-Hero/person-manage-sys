@@ -5,8 +5,6 @@
       <el-menu
         :default-active="activeIndex"
         class="el-menu-vertical-demo"
-        @open="handleOpen"
-        @close="handleClose"
         router>
         <el-menu-item index="/users">
           <i class="el-icon-user"></i>
@@ -50,12 +48,7 @@ export default {
       }
     },
     methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      }
+      
     },
     components: {
       

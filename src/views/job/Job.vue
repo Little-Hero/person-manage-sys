@@ -1,12 +1,16 @@
 <template>
   <div class="Job">
-
+    <!-- <Main></Main> -->
   </div>
 </template>
 
 <script>
-export default {
+// import Main from 'views/job/main/Main'
 
+export default {
+    components: {
+      // Main
+    }
 }
 </script>
 

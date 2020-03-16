@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 /**
- * 封装配置axios的post方法
+ * 封装配置axios的post方法(添加)
  * 
  */
 
