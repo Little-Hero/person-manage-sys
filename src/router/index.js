@@ -78,10 +78,10 @@ const routes = [
 
             // -----------------------------------人员管理路由-----------------------------------
             {
-                name: 'Workers',
-                path: '/workers',
+                name: 'Flow',
+                path: '/flow',
                 component: () =>
-                    import ( /* webpackChunkName: "DepartmentVue" */ 'views/workers/Workers.vue'),
+                    import ( /* webpackChunkName: "DepartmentVue" */ 'views/flow/Flow.vue'),
             }
         ]
     },

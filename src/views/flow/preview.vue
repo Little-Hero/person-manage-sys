@@ -1,5 +1,5 @@
 <template>
-  <div class="Attendance">
+  <div>
     
   </div>
 </template>
@@ -10,8 +10,6 @@ export default {
 }
 </script>
 
-<style scoped>
-    .Attendance{
-      height: 200px;
-    }
+<style>
+
 </style>

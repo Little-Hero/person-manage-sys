@@ -3,11 +3,9 @@
     <Head style="background:white"></Head>
     <div class="from">
       <div class="btn">
-        <router-link to="/users">
-          <el-button type="primary" size="medium">
-            <i class="el-icon-arrow-left">返回</i>
-          </el-button>
-        </router-link>        
+        <el-button type="primary" size="medium" @click="back">
+          <i class="el-icon-arrow-left">返回</i>
+        </el-button>
         <el-button type="danger" size="medium" style="float:right">
           <i class="el-icon-delete"> 删除</i>
         </el-button>
@@ -77,6 +75,9 @@ export default {
       Head
     },
     methods: {
+      back(){
+        this.$router.replace("/users")
+      },
       editClick(){
         this.isEdit = false,
         this.isShow = false
@@ -97,8 +98,14 @@ export default {
             adress: this.tableData.adress,
             email: this.tableData.email
           }
-          putUser(this.tableData.id, newTableData).then(res => {
+          putUser(newTableData, this.tableData.id)
+          .then(res => {
+            console.log(res)
             this.$router.push('/users')
+            this.$message({
+                type: 'success',
+                message: '修改成功'
+            })
           })
           this.isEdit = true
           this.isShow = true
@@ -113,7 +120,9 @@ export default {
       }
     },
     created(){
-      DetUser(this.tableId).then(res => {
+      const tableId = this.tableId
+      DetUser(tableId).then(res => {
+          console.log(res)
           this.tableData = res.data
         })
     }
@@ -122,13 +131,16 @@ export default {
 
 <style scoped>
     .Detail{
-      background-image: url('~assets/img/11e15da2f570b6c3682f0f408d875290.jpg');
+      /* background-image: url('~assets/img/11e15da2f570b6c3682f0f408d875290.jpg'); */
       
 		}
     .from{
       width: 40%;
       margin: 0 auto;
       background: #fff;
+      border: solid 1px #eee;
+      box-shadow: 15px;
+      padding: 0 20px 10px 20px;
     }
     .demo-ruleForm{
       margin-top: 10px;

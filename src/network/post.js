@@ -5,6 +5,16 @@ import axios from 'axios'
  * 
  */
 
+axios.defaults.baseURL = 'http://localhost:8080'
+
+// export function postAdmin(object) {
+//     return axios.post('http://localhost:8080/login', object)
+// }
+
 export function postUser(data) {
-    return axios.post('http://localhost:3000/users', data)
+    return axios.post('/add', data)
+}
+
+export function postApply(data) {
+    return axios.post('/Apply', data)
 }

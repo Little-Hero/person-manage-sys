@@ -7,7 +7,7 @@
 
     <!-- 侧栏导航 -->
   <el-container>    
-    <el-aside width="31vh" class="aside">
+    <el-aside width="32vh" class="aside">
       <Aside></Aside>
     </el-aside>
 
@@ -57,6 +57,7 @@ export default {
     .main{
       /* background: crimson; */
       font-size: 18px;
+      padding: 10px;
     }
     .footer{
       background: burlywood;

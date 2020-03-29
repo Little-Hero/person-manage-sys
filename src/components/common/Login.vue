@@ -22,6 +22,8 @@
     </div>
 </template>
 <script>
+// import { postAdmin } from "network/post"
+
     export default {
         name: "login",
         data() {
@@ -61,12 +63,24 @@
                 // 为表单绑定验证功能
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        // 使用 vue-router 路由到指定页面，该方式称之为编程式导航
-                        console.log("Success")
-                        this.$router.replace("/index");
-                        // alert(JSON.stringify(this.user))可以直接把this.user对象传给后端进行校验用户名和密码
+                        this.$axios.post(
+                          'http://localhost:8080/login',
+                          {
+                            username: this.loginForm.loginName,
+                            password: this.loginForm.loginPassword
+                          }
+                        )
+                        .then(res => {
+                          if (res.data==true) {
+                            this.$router.replace("/index")
+                            console.log("登录成功")
+                          }
+                        })
+                        .catch(err => {                          
+                          console.log(err)
+                        })
                     } else {
-                        return false;
+                        return false
                     }
                 });
             },

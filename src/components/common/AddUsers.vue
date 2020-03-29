@@ -21,20 +21,34 @@
         <el-form-item label="年龄" prop="age">
           <el-input v-model.number="ruleForm.age"></el-input>
         </el-form-item>
-        <el-form-item label="所在部门" prop="department">
+        <!-- <el-form-item label="所在部门" prop="department">
           <el-input v-model="ruleForm.department"></el-input>
+        </el-form-item> -->
+        <el-form-item label="所在部门">
+          <el-select v-model="ruleForm.department" placeholder="请选择部门">
+            <el-option label="人事行政部" value="人事行政部"></el-option>
+            <el-option label="产品开发部" value="产品开发部"></el-option>
+            <el-option label="品牌推广部" value="品牌推广部"></el-option>
+            <el-option label="财务部" value="财务部"></el-option>
+            <el-option label="运营部" value="运营部"></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="担任职位" prop="woking">
           <el-input v-model="ruleForm.woking"></el-input>
         </el-form-item>
         <el-form-item label="电话" prop="phone">
-          <el-input v-model.number="ruleForm.phone"></el-input>
+          <el-input v-model.number="ruleForm.phone" oninput="if(value.length>11) value=value.slice(0,11)"></el-input>
         </el-form-item>
         <el-form-item label="电子邮箱" prop="email">
           <el-input v-model="ruleForm.email"></el-input>
         </el-form-item>
-        <el-form-item label="家庭住址" prop="adress">
-          <el-input v-model="ruleForm.adress"></el-input>
+        <el-form-item label="家庭住址">
+        <el-input v-model="ruleForm.adress"></el-input>
+          <!-- <el-cascader
+            placeholder="试试搜索：我"
+            :options="ruleForm.adress"
+            filterable>
+          </el-cascader> -->
         </el-form-item>
         <div style="text-align:center">
           <el-button type="primary" @click="submitForm('ruleForm');centerDialogVisible = false">添加</el-button>
@@ -70,7 +84,7 @@ export default {
             { required: true, message: '请输入ID' }
           ],
           name: [
-            { required: true, message: '请输入活动名称', trigger: 'change' },
+            { required: true, message: '请输入名字', trigger: 'change' },
             { min: 2, max: 4, message: '长度在 2 到 4 个字符', trigger: 'blur' }
           ],
           sex: [
@@ -81,14 +95,14 @@ export default {
             { type: 'integer', message: '年龄必须为数字值'}
           ],
           department: [
-            { required: true, message: '请输入部门名称', trigger: 'change' }
+            { required: true, message: '请选择部门', trigger: 'change' }
           ],
           woking: [
             { required: true, message: '请输入担任职位', trigger: 'change' }
           ],
           phone: [
             { required: true, message: '请输入电话号码', trigger: 'change' },            
-            { type: 'integer', message: '电话号码必须为数字值', trigger: 'change'}
+            { type:"integer", min: 8, message: '请输入至少8位数', trigger: 'change'}
           ],
           email: [
             { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }
@@ -115,6 +129,7 @@ export default {
               name: this.ruleForm.name,
               sex: this.ruleForm.sex,
               age: this.ruleForm.age,
+              woking: this.ruleForm.woking,
               phone: this.ruleForm.phone,
               email: this.ruleForm.email,
               department: this.ruleForm.department,
@@ -131,9 +146,11 @@ export default {
                 message: '添加成功'
             })
             this.tableAddData.push(newUser)
+            
             this.tableAddData.sort((a, b) => {
               return a.id - b.id
             })
+            console.log(newUser)
             this.$refs[formName].resetFields()
             })
             

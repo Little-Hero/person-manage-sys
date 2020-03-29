@@ -1,5 +1,7 @@
 import axios from 'axios'
 
-export function putUser(id, data) {
-    return axios.put('http://localhost:3000/users/' + id, data)
+axios.defaults.baseURL = 'http://localhost:8080'
+
+export function putUser(data) {
+    return axios.put('/update', data)
 }

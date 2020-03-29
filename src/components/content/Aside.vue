@@ -26,9 +26,9 @@
           <i class="el-icon-menu"></i>
           <span slot="title">岗位管理</span>
         </el-menu-item>
-        <el-menu-item index="/workers">
+        <el-menu-item index="/flow">
           <i class="el-icon-setting"></i>
-          <span slot="title">人员信息</span>
+          <span slot="title">人员流动</span>
         </el-menu-item>
         <el-menu-item index="/attendance">
           <i class="el-icon-setting"></i>
